@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  asterisk:
+    image: andrius/asterisk:latest
+    container_name: routeshield-asterisk
+    restart: always
+    ports:
+      - "5060:5060/udp"
+      - "5038:5038/tcp"
+    volumes:
+      - ./etc/sip.conf:/etc/asterisk/sip.conf:ro
+      - ./etc/extensions.conf:/etc/asterisk/extensions.conf:ro
+      - ./etc/manager.conf:/etc/asterisk/manager.conf:ro
+      - ./sounds:/var/lib/asterisk/sounds/routeshield:rw

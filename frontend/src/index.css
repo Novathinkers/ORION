@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root, .dark {
+    --color-base: #0B1220;
+    --color-base-panel: #131C2E;
+    --color-base-raised: #1A2438;
+    --color-base-border: #24304A;
+
+    --color-ink: #E8ECF4;
+    --color-ink-muted: #8B98B3;
+    --color-ink-faint: #5A6685;
+
+    --shadow-panel: 0 1px 0 0 rgba(255,255,255,0.03) inset, 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  .light {
+    --color-base: #F4F6FA;
+    --color-base-panel: #FFFFFF;
+    --color-base-raised: #F8FAFC;
+    --color-base-border: #E2E8F0;
+
+    --color-ink: #0F172A;
+    --color-ink-muted: #475569;
+    --color-ink-faint: #64748B;
+
+    --shadow-panel: 0 1px 3px 0 rgba(0,0,0,0.05), 0 4px 12px -2px rgba(0,0,0,0.05);
+  }
+
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-base text-ink font-body antialiased transition-colors duration-200;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(47, 217, 196, 0.06), transparent 40%),
+      radial-gradient(circle at 85% 100%, rgba(47, 217, 196, 0.04), transparent 40%);
+    background-attachment: fixed;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-ink tracking-tight;
+  }
+  ::selection {
+    @apply bg-signal/30 text-ink;
+  }
+  *:focus-visible {
+    outline: 2px solid #2FD9C4;
+    outline-offset: 2px;
+  }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--color-base-border); border-radius: 4px; }
+}
+
+@layer components {
+  .panel {
+    @apply bg-base-panel border border-base-border rounded-xl shadow-panel transition-colors duration-200;
+  }
+  .live-dot {
+    @apply relative inline-flex h-2.5 w-2.5 rounded-full bg-signal;
+  }
+  .live-dot::after {
+    content: "";
+    @apply absolute inset-0 rounded-full bg-signal animate-pulse-ring;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-signal text-base-panel font-semibold px-4 py-2.5 text-sm hover:bg-signal-glow transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-sm;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-base-raised border border-base-border text-ink font-medium px-4 py-2.5 text-sm hover:border-signal/50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-risk-veryhigh/15 border border-risk-veryhigh/40 text-risk-veryhigh font-semibold px-4 py-2.5 text-sm hover:bg-risk-veryhigh/25 transition-colors;
+  }
+  .input {
+    @apply w-full rounded-lg bg-base-raised border border-base-border px-3 py-2.5 text-sm text-ink placeholder:text-ink-faint focus:border-signal/60 outline-none transition-colors;
+  }
+  .label {
+    @apply text-xs font-medium uppercase tracking-wider text-ink-muted mb-1.5 block;
+  }
+  .eyebrow {
+    @apply text-[11px] font-mono uppercase tracking-[0.15em] text-signal;
+  }
+  .data-mono {
+    @apply font-mono text-sm text-ink;
+  }
+
+  /* ORION High-Detail Map Tile Styling */
+  .orion-dark-map .leaflet-tile-pane {
+    filter: brightness(0.68) invert(1) contrast(1.25) hue-rotate(200deg) saturate(0.85);
+  }
+  .orion-light-map .leaflet-tile-pane {
+    filter: none;
+  }
+
+  /* Prevent Leaflet Map from overlapping sticky headers, modals, or autocomplete dropdowns */
+  .leaflet-container {
+    z-index: 0 !important;
+  }
+  .leaflet-pane {
+    z-index: 1 !important;
+  }
+  .leaflet-top, .leaflet-bottom {
+    z-index: 2 !important;
+  }
+}
