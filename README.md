@@ -64,6 +64,6 @@ By combining real-time operational data, maps, risk analysis, fleet visibility, 
 
 Navigate Smarter. Operate Safer. Stay Resilient.
 
-PROTOTYPE DEMO LINK : https://orion-nav.vercel.app/login
+PROTOTYPE DEMO LINK : https://orion-nav.vercel.app
 
 </div>
